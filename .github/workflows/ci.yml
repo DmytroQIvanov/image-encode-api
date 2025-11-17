@@ -33,10 +33,10 @@ on:
   workflow_dispatch:
 
 env:
-  PROJECT_ID: 'image-encoding' #
-  REGION: 'us-central1' #
-  SERVICE: 'image-encoding' #
-  GAR_NAME: 'image-encoding'
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION }}
+  SERVICE: ${{ vars.GCP_SERVICE_NAME }}
+  GAR_NAME: ${{ vars.GCP_GAR_REP_NAME }}
 
 jobs:
   deploy:
