@@ -83,9 +83,6 @@ jobs:
             --region=${{ env.REGION }} \
             --allow-unauthenticated \
             --cpu=8 \
-            --gpu=1 \
-            --gpu-type=nvidia-l4 \
-            --no-gpu-zonal-redundancy \
             --memory=32Gi \
             --concurrency=80 \
             --min-instances=1 \
