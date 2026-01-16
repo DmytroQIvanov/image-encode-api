@@ -82,8 +82,8 @@ jobs:
             --image=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.SERVICE }}:${{ github.sha }} \
             --region=${{ env.REGION }} \
             --allow-unauthenticated \
-            --cpu=8 \
-            --memory=32Gi \
+            --cpu=2 \
+            --memory=2Gi \
             --concurrency=80 \
             --min-instances=1 \
             --max-instances=1 \
