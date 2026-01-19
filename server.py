@@ -16,6 +16,10 @@ from encoder import Encoder
 from typing import List
 import traceback
 
+# from docker_utils.minio_util import MinioUtils
+
+
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -34,12 +38,13 @@ app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5174","http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# MinioUtils.createTestFile(" ");
 
 def get_encoder(request: Request) -> Encoder:
     return request.app.state.encoder
@@ -158,22 +163,33 @@ async def decode_image(
         restore_image: bool = Form(False),
         encoder: Encoder = Depends(get_encoder)
 ):
+    print('decode-image')
     try:
         # width, height = image_shape.width, image_shape.height
         compressed_img = await compressed_img.read()
 
+
+        print("test")
+        print(img_size.height, img_size.width)
         # Декодуємо отримані дані
         decoded_image = encoder.decode(compressed_img, (img_size.height, img_size.width),
                                        restore_image=restore_image)
 
         # Конвертуємо отримане зображення в формат, який можна відправити як відповідь
+        print("test1")
         decoded_image = cv2.cvtColor(decoded_image, cv2.COLOR_RGB2BGR)
+        print("test2")
         _, buffer = cv2.imencode('.jpg', decoded_image)
 
+        print("test3")
         image_bytes = buffer.tobytes()
 
+        print("test4")
         image_io = io.BytesIO(image_bytes)
+        print("test5")
         image_io.seek(0)
+        print("test6")
+
 
         # Повертаємо як стрімінгову відповідь
         return StreamingResponse(

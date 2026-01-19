@@ -4,10 +4,19 @@ from fragment import Fragment
 import numpy as np
 
 class FragmentsStorage:
+
+
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def __init__(self):
         self._fragments: Dict[int, Fragment] = {}
         self._next_id: int = 1
 
+
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def add_fragment(self, image_data:  np.ndarray, features: np.ndarray) -> int:
         """Додає новий фрагмент та повертає унікальний ID"""
         fragment_id = self._next_id
@@ -15,6 +24,10 @@ class FragmentsStorage:
         self._next_id += 1
         return fragment_id
 
+
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def add_fragment_with_id(self, fragment_id: int, image_data:  np.ndarray, features: np.ndarray) -> None:
         """Додає фрагмент за заданим ID. Не змінює лічильник."""
         if fragment_id in self._fragments:
@@ -25,23 +38,44 @@ class FragmentsStorage:
         if fragment_id >= self._next_id:
             self._next_id = fragment_id + 1
 
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def get_fragment(self, fragment_id: int) -> Optional[Fragment]:
         """Повертає зображення і вектор ознак за ID"""
         return self._fragments.get(fragment_id)
 
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def get_random_fragment(self) -> Optional[Fragment]:
         return random.choice(list(self._fragments.values()))
 
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def get_fragment_as_dict(self, fragment_id: int) -> Optional[Dict]:
         """Повертає фрагмент у вигляді словника з image та feature"""
         fragment = self._fragments.get(fragment_id)
         return fragment.to_dict() if fragment else None
 
+
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def items(self):
         return self._fragments.items()
 
+
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def get_dict(self):
         return self._fragments
 
+
+    # ------------------
+    # --- REFACTORED ---
+    # ------------------
     def __len__(self):
         return len(self._fragments)
