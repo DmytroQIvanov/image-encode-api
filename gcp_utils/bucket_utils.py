@@ -1,7 +1,7 @@
 from google.cloud import storage
 from docker_utils.minio_util import MinioUtils
 
-from .credentials import CREDENTIALS
+# from .credentials import CREDENTIALS
 import os
 from datetime import timedelta, datetime, UTC
 import io
@@ -12,13 +12,13 @@ from .fragments_storage import FragmentsStorage
 class MinioBucketUtils:
 
     def __init__(self):
-        self.bucket_name = os.environ.get('GCP_BUCKET_NAME')
-        self.client = storage.Client(credentials=CREDENTIALS, project=CREDENTIALS.project_id)
-        self.bucket = self.client.bucket(self.bucket_name)
+        # self.bucket_name = os.environ.get('GCP_BUCKET_NAME')
+        # self.client = storage.Client(credentials=CREDENTIALS, project=CREDENTIALS.project_id)
+        # self.bucket = self.client.bucket(self.bucket_name)
 
         # --- MINIO ---
         self.minio = MinioUtils()
-        self.minio.createTestFile()
+        # self.minio.createTestFile()
 
     # ------------------
     # --- REFACTORED ---

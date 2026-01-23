@@ -9,7 +9,7 @@ from typing import Optional, List
 
 from docker_utils.minio_util import MinioUtils
 from fragment import Fragment
-from .credentials import CREDENTIALS
+# from .credentials import CREDENTIALS
 from .bucket_utils import MinioBucketUtils
 from .fragments_storage import FragmentsStorage
 
@@ -39,7 +39,7 @@ class BigQueryDB:
         # Створюємо клієнта BigQuery
         # self.client = bigquery.Client(credentials=CREDENTIALS, project=CREDENTIALS.project_id)
         self.tree = None
-        self.project_id = CREDENTIALS.project_id
+        # self.project_id = CREDENTIALS.project_id
         # self.dataset_id = os.environ['GCP_DATASET_ID']
         # self.table_id = os.environ['GCP_TABLE_ID']
         # self.target_table = self.client.get_table(f"{self.project_id}.{self.dataset_id}.{self.table_id}")
@@ -49,7 +49,7 @@ class BigQueryDB:
         self.buffer_fragments_ids = []
         # ---POSTGRESQL---
         self.conn = psycopg2.connect(
-            host="localhost",
+            host="postgres",
             database="postgres",
             user="postgres",
             password="postgres22312321",

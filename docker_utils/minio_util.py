@@ -10,7 +10,8 @@ object_name = "hello2.txt"
 class MinioUtils:
     def __init__(self):
         client = Minio(
-            "localhost:9000",
+            # "localhost:9000",
+            "minio:9000",
             access_key="minioadmin333",
             secret_key="minioadmin333",
             secure=False  # Set to True if using HTTPS
@@ -24,12 +25,12 @@ class MinioUtils:
         self.client = client
 
 
-    def createTestFile(self):
-        try:
-            self.client.fput_object(bucket_name, object_name, file_path)
-            print(f"✅ '{file_path}' uploaded to bucket '{bucket_name}' as '{object_name}'.")
-        except S3Error as err:
-            print(f"❌ Upload failed: {err}")
+    # def createTestFile(self):
+    #     try:
+    #         self.client.fput_object(bucket_name, object_name, file_path)
+    #         print(f"✅ '{file_path}' uploaded to bucket '{bucket_name}' as '{object_name}'.")
+    #     except S3Error as err:
+    #         print(f"❌ Upload failed: {err}")
 
     def getFile(self,def_object_name):
         try:
